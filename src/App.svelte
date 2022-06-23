@@ -1,6 +1,6 @@
 <script>
   import Toolbar from "./toolbar/toolbar.svelte";
-
+  import SavedThings from "./components/saved_things.svelte";
   import { _, _lang } from "./lang.js";
 
   let lang = "en";
@@ -43,6 +43,10 @@
   let clicked = false;
   let actual_bg_color = pallete["square_white"];
   let actual_picked_color = pallete["square_black"];
+
+  let display_save_panel = false;
+
+  let editing_title = "";
 
   let grid_canvas = [];
   changeCanvasSize(grid_size);
@@ -105,6 +109,7 @@
     <a href="https://github.com/NaokiStark/emoji-draw" target="_blank">
       GitHub
     </a>
+    {editing_title}
   </small>
 </h1>
 
@@ -129,6 +134,7 @@
   }}
   on:change_color={(e) => (actual_picked_color = e.detail)}
   on:copy_clipboard={(e) => copy_to_clipboard()}
+  on:toggle_save_menu={(e) => (display_save_panel = !display_save_panel)}
 />
 
 <div
@@ -144,18 +150,54 @@
         on:mousedown={() => {
           grid_canvas[i][e] = actual_picked_color;
           clicked = true;
+          console.log("mousedown", clicked);
         }}
-        on:mouseup={() => (clicked = false)}
+        on:touchstart={() => {
+          grid_canvas[i][e] = actual_picked_color;
+          clicked = true;
+          console.log("touchstart", clicked);
+        }}
+        on:mouseup={() => {
+          clicked = false;
+          console.log("mouseup", clicked);
+        }}
         on:mouseenter={() => {
+          console.log("mouseenter", clicked);
           if (clicked) {
             grid_canvas[i][e] = actual_picked_color;
+            console.log("i, e", i, e);
           }
-        }}>{pixel}</span
+        }}
+        on:touchmove={() => {
+          console.log("touchmove", clicked);
+          if (clicked) {
+            grid_canvas[i][e] = actual_picked_color;
+            console.log("i, e", i, e);
+          }
+        }}
       >
+        {pixel}
+      </span>
     {/each}
     <br />
   {/each}
 </div>
+
+<SavedThings
+  {lang}
+  {_}
+  {display_save_panel}
+  {grid_canvas}
+  {canvas_render_size}
+  on:save-close={() => {
+    display_save_panel = !display_save_panel;
+  }}
+  on:load_work={(e) => {
+    grid_canvas = e.detail.grid;
+    editing_title = `| ${_("editing", lang)} ${e.detail.name}`;
+    canvas_render_size = e.detail.canvas_render_size;
+  }}
+/>
 
 <style>
   .emoji-container {

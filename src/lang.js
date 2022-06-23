@@ -31,6 +31,20 @@ export const _lang = {
         custom_size: "Custom size",
         copy_clipboard: "Copy to Clipboard",
         copied: "Copied to clipboard!",
+
+
+        save_button: "Save",
+        saved_work: "Saved Work",
+        save_warning_advice: "Warning!, all creation are saved <i><b>locally</b></i> in your browser!",
+        input_save_name: "Name",
+        saved_work_title: "Your creations",
+        open_save_button: "Open | Save",
+        saved_at: "Saved At",
+        empty_list: "Empty list 🌀",
+        grid_size_cannot_save: "Canvas max limit: 100",
+        grid_saved: "Saved successfully!",
+        name_cannot_be_blank: "Name field cannot be blank.",
+        editing: "Editing",
     },
     es: {
         site_title: "Dibujo con emojis",
@@ -64,6 +78,20 @@ export const _lang = {
         custom_size: "Personalizado",
         copy_clipboard: "Copiar todo",
         copied: "Copiado al portapapeles!",
+
+        save_button: "Guardar",
+        saved_work: "Guardar",
+        save_warning_advice: "Atención!, todas tus creaciones son guardadas <i><b>localmente</b></i> en tu navegador!",
+        input_save_name: "Nombre",
+        saved_work_title: "Tus creaciones",
+        open_save_button: "Abrir | Guardar",
+        saved_at: "Guardado: ",
+        empty_list: "En un principio, sólo había silencio 🌅",
+        grid_size_cannot_save: "El límite de pixel es 100, no se guardará nada.",
+        grid_saved: "Guardado con éxito!",
+        name_cannot_be_blank: "Por favor, ingresa un nombre.",
+
+        editing: "Editando",
     },
 };
 

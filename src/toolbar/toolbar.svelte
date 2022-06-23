@@ -48,6 +48,15 @@
         on:change_color={(e) => ev("change_color", e.detail)}
         on:copy_clipboard={(e) => ev("copy_clipboard")}
     />
+    <div class="toolbar-item">
+        <button
+            type="button"
+            class="btn btn-success btn-sm"
+            on:click={(x) => ev("toggle_save_menu")}
+        >
+            {_("open_save_button", lang)}
+        </button>
+    </div>
 </div>
 
 <style>
