@@ -94,6 +94,13 @@
 
     //user_select = "none";
   }
+
+  function shareOnTwitter() {
+    let url = "https://twitter.com/intent/tweet?text=";
+    let text = canvas.innerText + "\n" + "https://emoji-draw.vercel.app";
+
+    window.open(url + encodeURIComponent(text));
+  }
 </script>
 
 <head>
@@ -135,6 +142,7 @@
   on:change_color={(e) => (actual_picked_color = e.detail)}
   on:copy_clipboard={(e) => copy_to_clipboard()}
   on:toggle_save_menu={(e) => (display_save_panel = !display_save_panel)}
+  on:tweet={shareOnTwitter}
 />
 
 <div
@@ -179,7 +187,7 @@
         {pixel}
       </span>
     {/each}
-    <br />
+    <br alt="&NewLine;" />
   {/each}
 </div>
 

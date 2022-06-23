@@ -45,6 +45,10 @@ export const _lang = {
         grid_saved: "Saved successfully!",
         name_cannot_be_blank: "Name field cannot be blank.",
         editing: "Editing",
+
+        twitter: "Twitter",
+        hide_some_controls: "Hide controls",
+        show_some_controls: "Show controls",
     },
     es: {
         site_title: "Dibujo con emojis",
@@ -92,6 +96,9 @@ export const _lang = {
         name_cannot_be_blank: "Por favor, ingresa un nombre.",
 
         editing: "Editando",
+        twitter: "Twitter",
+        hide_some_controls: "Ocultar controles",
+        show_some_controls: "Mostrar controles",
     },
 };
 

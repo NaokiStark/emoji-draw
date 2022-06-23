@@ -14,29 +14,33 @@
     export let actual_picked_color;
     export let lang;
     export let _;
+
+    let some_controls_visible = true;
 </script>
 
 <div class="toolbar d-flex">
-    <CanvasSize
-        {grid_size}
-        {pallete}
-        {grid_sizes}
-        {actual_bg_color}
-        {canvas_render_size}
-        {lang}
-        {_}
-        on:size_change={(e) => ev("size_change", e.detail)}
-        on:render_size={(e) => ev("render_size", e.detail)}
-    />
-    <ColorReset
-        {grid_size}
-        {pallete}
-        {grid_sizes}
-        {actual_bg_color}
-        {lang}
-        {_}
-        on:bg_change={(e) => ev("bg_change", e.detail)}
-    />
+    {#if some_controls_visible}
+        <CanvasSize
+            {grid_size}
+            {pallete}
+            {grid_sizes}
+            {actual_bg_color}
+            {canvas_render_size}
+            {lang}
+            {_}
+            on:size_change={(e) => ev("size_change", e.detail)}
+            on:render_size={(e) => ev("render_size", e.detail)}
+        />
+        <ColorReset
+            {grid_size}
+            {pallete}
+            {grid_sizes}
+            {actual_bg_color}
+            {lang}
+            {_}
+            on:bg_change={(e) => ev("bg_change", e.detail)}
+        />
+    {/if}
     <ColorPicker
         {grid_size}
         {pallete}
@@ -51,10 +55,32 @@
     <div class="toolbar-item">
         <button
             type="button"
+            class="btn btn-success btn-sm hide-some-controls"
+            on:click={() => (some_controls_visible = !some_controls_visible)}
+        >
+            {#if some_controls_visible}
+                {_("hide_some_controls", lang)}
+            {:else}
+                {_("show_some_controls", lang)}
+            {/if}
+        </button>
+    </div>
+    <div class="toolbar-item">
+        <button
+            type="button"
             class="btn btn-success btn-sm"
             on:click={(x) => ev("toggle_save_menu")}
         >
             {_("open_save_button", lang)}
+        </button>
+    </div>
+    <div class="toolbar-item">
+        <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            on:click={() => ev("tweet")}
+        >
+            {_("twitter", lang)}
         </button>
     </div>
 </div>
