@@ -1,6 +1,7 @@
 <script>
   import Toolbar from "./toolbar/toolbar.svelte";
   import SavedThings from "./components/saved_things.svelte";
+  import ImageFrame from "./components/image_frame.svelte";
   import { _, _lang } from "./lang.js";
 
   let lang = "en";
@@ -51,6 +52,8 @@
   let grid_canvas = [];
   changeCanvasSize(grid_size);
   let canvas_render_size = 3; //em
+
+  let show_pic_frame = false;
 
   function changeCanvasSize(size) {
     let tmpcanvas = [];
@@ -145,50 +148,55 @@
   on:tweet={shareOnTwitter}
 />
 
-<div
-  id="canvas"
-  class="emoji-container"
-  style="font-size:{canvas_render_size}em;user-select: {user_select};"
-  bind:this={canvas}
->
-  {#each grid_canvas as row, i}
-    {#each row as pixel, e}
-      <span
-        class="cursor-crosshair"
-        on:mousedown={() => {
-          grid_canvas[i][e] = actual_picked_color;
-          clicked = true;
-          console.log("mousedown", clicked);
-        }}
-        on:touchstart={() => {
-          grid_canvas[i][e] = actual_picked_color;
-          clicked = true;
-          console.log("touchstart", clicked);
-        }}
-        on:mouseup={() => {
-          clicked = false;
-          console.log("mouseup", clicked);
-        }}
-        on:mouseenter={() => {
-          console.log("mouseenter", clicked);
-          if (clicked) {
+<div class="d-flex flex-row flex-wrap justify-content-center">
+  <div
+    id="canvas"
+    class="emoji-container mx-3"
+    style="font-size:{canvas_render_size}em;user-select: {user_select};"
+    bind:this={canvas}
+  >
+    {#each grid_canvas as row, i}
+      {#each row as pixel, e}
+        <span
+          class="cursor-crosshair"
+          on:mousedown={() => {
             grid_canvas[i][e] = actual_picked_color;
-            console.log("i, e", i, e);
-          }
-        }}
-        on:touchmove={() => {
-          console.log("touchmove", clicked);
-          if (clicked) {
+            clicked = true;
+            console.log("mousedown", clicked);
+          }}
+          on:touchstart={() => {
             grid_canvas[i][e] = actual_picked_color;
-            console.log("i, e", i, e);
-          }
-        }}
-      >
-        {pixel}
-      </span>
+            clicked = true;
+            console.log("touchstart", clicked);
+          }}
+          on:mouseup={() => {
+            clicked = false;
+            console.log("mouseup", clicked);
+          }}
+          on:mouseenter={() => {
+            console.log("mouseenter", clicked);
+            if (clicked) {
+              grid_canvas[i][e] = actual_picked_color;
+              console.log("i, e", i, e);
+            }
+          }}
+          on:touchmove={() => {
+            console.log("touchmove", clicked);
+            if (clicked) {
+              grid_canvas[i][e] = actual_picked_color;
+              console.log("i, e", i, e);
+            }
+          }}
+        >
+          {pixel}
+        </span>
+      {/each}
+      <br alt="&NewLine;" />
     {/each}
-    <br alt="&NewLine;" />
-  {/each}
+  </div>
+  {#if show_pic_frame}
+    <ImageFrame {lang} {_} />
+  {/if}
 </div>
 
 <SavedThings

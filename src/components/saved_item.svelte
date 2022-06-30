@@ -4,6 +4,7 @@
     export let work;
     export let id;
 
+    import { twiemoji } from "../twemoji";
     import { createEventDispatcher } from "svelte/internal";
 
     let ev = createEventDispatcher();
@@ -21,7 +22,11 @@
         <h4>{work.name}</h4>
     </div>
     <br />
-    <div class="saved-content text-center" on:click={() => ev("load_work", id)}>
+    <div
+        use:twiemoji
+        class="saved-content text-center"
+        on:click={() => ev("load_work", id)}
+    >
         {#each work.grid as row, i}
             {#if i < 10}
                 {#each row as pixel, e}
@@ -48,10 +53,16 @@
         letter-spacing: 0.01em;
     }
     .saved-pixel {
-        font-size: 0.8em;
+        font-size: 1em;
     }
     .del_btn {
         position: absolute;
         right: 0;
+    }
+    :global(img.emoji) {
+        height: 1em;
+        width: 1em;
+        margin: 0 0.05em 0 0.1em;
+        vertical-align: -0.1em;
     }
 </style>
